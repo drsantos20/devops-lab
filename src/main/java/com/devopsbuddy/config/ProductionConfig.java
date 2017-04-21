@@ -12,9 +12,9 @@ import com.devopsbuddy.backend.service.SmtpEmailService;
  * created by drsantos on 19-04-2017
  */
 
-@Configuration
+@Configuration 
 @Profile("prod")
-@PropertySource("file:///${user.home}/Documentos/dev/application-prod.properties")
+@PropertySource("file:///${user.home}/Documents/dev/application-prod.properties")
 public class ProductionConfig {
 	
 	@Bean

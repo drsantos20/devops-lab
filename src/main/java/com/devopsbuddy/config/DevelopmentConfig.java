@@ -14,7 +14,7 @@ import com.devopsbuddy.backend.service.MockEmailService;
 
 @Configuration
 @Profile("dev")
-@PropertySource("file:///${user.home}/Documentos/dev/application-dev.properties")
+@PropertySource("file:///${user.home}/Documents/dev/application-dev.properties")
 public class DevelopmentConfig {
 	
 	@Bean
