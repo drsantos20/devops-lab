@@ -6,10 +6,11 @@ package com.devopsbuddy.test.integration;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.h2.command.ddl.CreateUser;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,6 +44,8 @@ public class RepositoriesIntegrationTest {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Rule public TestName testName = new TestName();
 	
 	@Before
 	public void init() {
@@ -83,8 +86,11 @@ public class RepositoriesIntegrationTest {
 	
     @Test
     public void createNewUser() throws Exception {
+    	
+    	String username = testName.getMethodName();
+		String email = testName.getMethodName() + "drsantos20@gmail.com";
 
-    	User basicUser = CreateUser();
+    	User basicUser = CreateUser(username, email);
     	
     	basicUser = userRepository.save(basicUser);
         User newlyCreatedUser = userRepository.findOne(basicUser.getId());
@@ -100,11 +106,11 @@ public class RepositoriesIntegrationTest {
 
     }
 
-	private User CreateUser() {
+	private User CreateUser(String username, String email) {
 		Plan basicPlan = createPlan(PlansEnum.BASIC);
 		planRepository.save(basicPlan);
 		
-		User basicUser = UserUtils.createBasicUser();
+		User basicUser = UserUtils.createBasicUser(username, email);
 		basicUser.setPlan(basicPlan);
 		
 		Role basicRole = createRole(RolesEnum.BASIC);
@@ -122,7 +128,11 @@ public class RepositoriesIntegrationTest {
 	
     @Test
     public void testDeleteUser() throws Exception {
-    	User basicUser = CreateUser();
+    	
+    	String username = testName.getMethodName();
+		String email = testName.getMethodName() + "drsantos20@gmail.com";
+    	
+    	User basicUser = CreateUser(username, email);
         userRepository.delete(basicUser.getId());
     }
     

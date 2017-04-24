@@ -18,12 +18,12 @@ public class UserUtils {
      * @param email The email.
      * @return A User entity
      */
-    public static User createBasicUser() {
+    public static User createBasicUser(String username, String email) {
 
         User user = new User();
-        user.setUsername("username");
+        user.setUsername(username);
         user.setPassword("secret");
-        user.setEmail("drsantos20@gmail.com");
+        user.setEmail(email);
         user.setFirstName("firstName");
         user.setLastName("lastName");
         user.setPhoneNumber("123456789123");
