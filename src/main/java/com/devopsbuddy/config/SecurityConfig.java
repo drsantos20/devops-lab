@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.devopsbuddy.backend.service.UserSecurityService;
+
 /**
  * @author Daniel on 21 de abr de 2017
  */
@@ -21,6 +23,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	
+	@Autowired
+	private UserSecurityService userSecurityService;
 	
 	@Autowired
 	private Environment env;
@@ -60,9 +66,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
+			.userDetailsService(userSecurityService); //inject here
+		
+		/*	 in Memory authentication
 			.inMemoryAuthentication()
 			.withUser("user").password("password")
 			.roles("USER");
+		*/
 	}
 
 }

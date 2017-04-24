@@ -6,6 +6,7 @@ package com.devopsbuddy.test.integration;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.h2.command.ddl.CreateUser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +61,7 @@ public class RepositoriesIntegrationTest {
     
     @Test
     public void testCreateNewRole() throws Exception {
-        Role userRole = createBasicRole(RolesEnum.BASIC);
+        Role userRole = createRole(RolesEnum.BASIC);
         roleRepository.save(userRole);
         Role retrievedRole = roleRepository.findOne(RolesEnum.BASIC.getId());
         Assert.assertNotNull(retrievedRole);
@@ -69,7 +70,7 @@ public class RepositoriesIntegrationTest {
 	/**
 	 * @return
 	 */
-	private Role createBasicRole(RolesEnum rolesEnum) {
+	private Role createRole(RolesEnum rolesEnum) {
 		return new Role(rolesEnum);
 	}
 
@@ -83,22 +84,7 @@ public class RepositoriesIntegrationTest {
     @Test
     public void createNewUser() throws Exception {
 
-    	Plan basicPlan = createPlan(PlansEnum.BASIC);
-    	planRepository.save(basicPlan);
-    	
-    	User basicUser = UserUtils.createBasicUser();
-    	basicUser.setPlan(basicPlan);
-    	
-    	Role basicRole = createBasicRole(RolesEnum.BASIC);
-    	Set<UserRole> userRoles = new HashSet<>();
-    	UserRole userRole = new UserRole(basicUser, basicRole);
-    	userRoles.add(userRole);
-    	
-    	basicUser.getUserRoles().addAll(userRoles);
-    	
-    	for (UserRole ur : userRoles) {
-    		roleRepository.save(ur.getRole());
-        }
+    	User basicUser = CreateUser();
     	
     	basicUser = userRepository.save(basicUser);
         User newlyCreatedUser = userRepository.findOne(basicUser.getId());
@@ -113,23 +99,35 @@ public class RepositoriesIntegrationTest {
         }
 
     }
-	
-	private User createBasicUser() {
+
+	private User CreateUser() {
+		Plan basicPlan = createPlan(PlansEnum.BASIC);
+		planRepository.save(basicPlan);
 		
-		User user = new User();
-		user.setUsername("basicUser");
-		user.setPassword("secret");
-		user.setEmail("drsantos20@gmail.com");
-		user.setFirstName("firstName");
-		user.setLastName("LastName");
-		user.setPhoneNumber("phoneNumber");
-		user.setCountry("country");	
-		user.setEnable(true);
-		user.setDescription("description");
-		user.setProfileImageURL("http://blabla.images.com/basicuser");
+		User basicUser = UserUtils.createBasicUser();
+		basicUser.setPlan(basicPlan);
 		
-		return user;
+		Role basicRole = createRole(RolesEnum.BASIC);
+		roleRepository.save(basicRole);
+		
+		Set<UserRole> userRoles = new HashSet<>();
+		UserRole userRole = new UserRole(basicUser, basicRole);
+		userRoles.add(userRole);
+		
+		basicUser.getUserRoles().addAll(userRoles);
+		basicUser = userRepository.save(basicUser);
+		
+		return basicUser;
 	}
+	
+    @Test
+    public void testDeleteUser() throws Exception {
+    	User basicUser = CreateUser();
+        userRepository.delete(basicUser.getId());
+    }
+    
+    
+	
 
 }
 	
