@@ -42,6 +42,8 @@ public class User implements Serializable {
 	
 	private String username;
 	
+	private boolean enable;
+	
 	private String password;
 	
 	private String email;
@@ -254,6 +256,20 @@ public class User implements Serializable {
 	 */
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	/**
+	 * @return the enable
+	 */
+	public boolean isEnable() {
+		return enable;
+	}
+
+	/**
+	 * @param enable the enable to set
+	 */
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
 	
 }
