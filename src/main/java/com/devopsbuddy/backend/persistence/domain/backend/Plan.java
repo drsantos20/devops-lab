@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.devopsbuddy.enums.PlansEnum;
+
 /**
  * @author Daniel on 23 de abr de 2017
  */
@@ -24,6 +26,11 @@ public class Plan implements Serializable {
 	
 	public Plan() {
 		
+	}
+	
+	public Plan(PlansEnum plansEnum) {
+		this.id = plansEnum.getId();
+		this.name = plansEnum.getPlanName();
 	}
 
 	/**

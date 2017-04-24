@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.devopsbuddy.enums.RolesEnum;
+
 /**
  * @author Daniel on 23 de abr de 2017
  */
@@ -25,10 +27,17 @@ public class Role implements Serializable {
 	/**
 	 * 
 	 */
-	public Role() {
-		// TODO Auto-generated constructor stub
+	public Role(RolesEnum rolesEnum) {
+		this.id = rolesEnum.getId();
+		this.name = rolesEnum.getRoleName();
 	}
 	
+	
+	
+	public Role() {
+		super();
+	}
+
 	@Id
 	private int id;
 	
