@@ -80,6 +80,9 @@ public class User implements Serializable, UserDetails {
 	
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles = new HashSet<>();
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
 
 	/**
 	 * @return the id
@@ -302,6 +305,14 @@ public class User implements Serializable, UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public Set<PasswordResetToken> getPasswordResetTokens() {
+		return passwordResetTokens;
+	}
+
+	public void setPasswordResetTokens(Set<PasswordResetToken> passwordResetTokens) {
+		this.passwordResetTokens = passwordResetTokens;
 	}
 	
 }
