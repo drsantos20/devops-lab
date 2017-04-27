@@ -1,4 +1,4 @@
-package com.devopsbuddy.web.i18n;
+package com.devopsbuddy.backend.service;
 
 import java.util.Locale;
 
@@ -27,7 +27,7 @@ public class I18NService {
 		return getMessage(messageId, locale);
 	}
 
-	private String getMessage(String messageId, Locale locale) {
+	public String getMessage(String messageId, Locale locale) {
 		return messageSource.getMessage(messageId, null, locale);
 	}
 

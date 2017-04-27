@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.devopsbuddy.backend.service.UserSecurityService;
+import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
 
 /**
  * @author Daniel on 21 de abr de 2017
@@ -52,7 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		"/about/**",
 		"/contact/**",
 		"/error/**/*",
-		"/console/**"
+		"/console/**",
+		 "/favicon/**",
+		ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
+		ForgotMyPasswordController.EMAIL_ADDRESS_VIEW_NAME
 	};
 	
 	@Override
