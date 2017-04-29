@@ -14,8 +14,8 @@ import com.devopsbuddy.backend.service.SmtpEmailService;
 
 @Configuration 
 @Profile("prod")
-//@PropertySource("file:///${user.home}/Documents/dev/application-prod.properties")
-@PropertySource(value="file:///${user.home}/Documentos/dev/application-dev.properties", encoding="UTF-8")
+@PropertySource("file:///${user.home}/Documents/dev/application-prod.properties")
+//@PropertySource(value="file:///${user.home}/Documentos/dev/application-dev.properties", encoding="UTF-8")
 public class ProductionConfig {
 	
 	@Bean
