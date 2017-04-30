@@ -44,20 +44,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	/** Public URLs */ 
-	public static final String [] PUBLIC_MATCHERS = {
-		"/webjars/**",
-		"/css/**",
-		"/js/**",
-		"/images/**",
-		"/",
-		"/about/**",
-		"/contact/**",
-		"/error/**/*",
-		"/console/**",
-		 "/favicon/**",
-		ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
-		ForgotMyPasswordController.EMAIL_ADDRESS_VIEW_NAME
-	};
+    private static final String[] PUBLIC_MATCHERS = {
+            "/webjars/**",
+            "/css/**",
+            "/js/**",
+            "/favicon/**",
+            "/images/**",
+            "/",
+            "/about/**",
+            "/contact/**",
+            "/error/**/*",
+            "/console/**",
+            ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
+            ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
+    };
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
