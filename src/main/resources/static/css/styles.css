@@ -18,6 +18,14 @@ body {
 	color: #19334d;
 }
 
+/*-------------------------------------------------------
+ *  Signup form
+ *-------------------------------------------------------/
+ /** Registration page */
+.fieldError {
+    border : 2px solid red;
+}
+
 .well {
 	margin-top: 120px;
 	color: #19334d;

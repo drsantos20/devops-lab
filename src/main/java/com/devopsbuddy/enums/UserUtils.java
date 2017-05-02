@@ -3,8 +3,8 @@ package com.devopsbuddy.enums;
 import javax.servlet.http.HttpServletRequest;
 
 import com.devopsbuddy.backend.persistence.domain.backend.User;
-import com.devopsbuddy.backend.persistence.domain.frontend.BasicAccountPayload;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
+import com.devopsbuddy.web.domain.frentend.BasicAccountPayload;
 
 /**
  * created by drsantos on 24-04-2017

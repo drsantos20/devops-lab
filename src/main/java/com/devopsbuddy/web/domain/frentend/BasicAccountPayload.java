@@ -1,4 +1,4 @@
-package com.devopsbuddy.backend.persistence.domain.frontend;
+package com.devopsbuddy.web.domain.frentend;
 
 import java.io.Serializable;
 
