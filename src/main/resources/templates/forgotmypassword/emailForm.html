@@ -34,7 +34,7 @@
                     <!-- Email -->
                     <div class="form-group">
                         <label for="email" th:text="#{form.email}"></label>
-                        <input type="email" class="form-control" id="email" name="email"  />
+                        <input type="email" class="form-control" id="email" name="email" data-validation="email"  />
                     </div>
                     <!-- Submit -->
                     <div class="form-group">
@@ -46,6 +46,18 @@
     </div>
 
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+<script>
+
+  $.validate({
+    modules : 'location, date, security, file',
+  });
+
+
+</script>
 
 <div th:replace="common/header :: before-body-scripts"></div>
 

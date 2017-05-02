@@ -42,12 +42,18 @@
         				
         				<div class="form-group">
         					<label for="username" th:text="#{login.username.text}"></label>
-       						<input type="text" id="username" name="username" class="form-control" />
+       						<input type="text" id="username" name="username" class="form-control"
+       						data-validation="length alphanumeric"
+							data-validation-length="3-12" 
+							data-validation-error-msg="username is required" />
         				</div>
         				
         				<div class="form-group">
         					<label for="password" th:text="#{login.password.text}"></label>
-       						<input type="password" id="password" name="password" class="form-control" />
+       						<input type="password" id="password" name="password" class="form-control" 
+       						data-validation="length alphanumeric"
+							data-validation-length="3-12" 
+							data-validation-error-msg="password is required" />
         				</div>
         				
         				<div class="form-group">
@@ -62,6 +68,18 @@
     <!-- /.row -->
 </div>
 <!-- /.container -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+<script>
+
+  $.validate({
+    modules : 'location, date, security, file',
+  });
+
+
+</script>
 
 <!-- Bootstrap core JavaScript -->
 <div th:replace="common/header :: before-body-scripts" ></div>
