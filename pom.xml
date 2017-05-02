@@ -53,6 +53,12 @@
 		</dependency>
 		<!-- end Spring Boot dependencies -->
 		
+		<dependency>
+			<groupId>uk.co.jemos.podam</groupId>
+			<artifactId>podam</artifactId>
+			<version>6.0.2.RELEASE</version>
+		</dependency>
+		
 		<!-- Webjars for jquery and bootstrap -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -98,6 +104,7 @@
 		    <artifactId>spring-context</artifactId>
 		    <version>4.3.7.RELEASE</version>
 		</dependency>
+		
 				
 		
 	</dependencies>
