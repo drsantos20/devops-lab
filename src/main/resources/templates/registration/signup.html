@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/header :: common-header" />
+
+
 <body>
 
-<div th:replace="common/navbar :: common-navbar" ></div>
+<div th:replace="common/navbar :: common-navbar"></div>
 
 <div class="container">
 
@@ -13,13 +15,13 @@
 
 
             <div th:if="${signedUp != null}">
-                <div th:if="${signedUp == 'true'}" class="alert alert-success alert-dismissible" role="alert">
+                <div th:if="${signedUp == 'true'}" class="alert alert-success alert-dismissible" style="margin-top: 60px;" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">x</span>
                     </button>
                     <p th:text="#{signup.profile.created.success}" class="text-center"/>
                 </div>
-                <div th:if="${signedUp == 'false'}" class="alert alert-danger alert-dismissible" role="alert">
+                <div th:if="${signedUp == 'false'}" class="alert alert-danger alert-dismissible" style="margin-top: 60px;" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">x</span>
                     </button>
@@ -47,24 +49,19 @@
                             <label for="username"
                                    th:text="#{signup.form.error.username.already.exists}"></label>
                             <input type="text" id="username" th:field="*{username}"
-                                   class="form-control fieldError" 
-                                   data-validation="length alphanumeric" 
-		 						   data-validation-length="3-12" 
-		 						   data-validation-error-msg="first name is required"  />
+                                   class="form-control fieldError" />
                         </div>
                         <div th:if="${duplicatedUsername == null}">
                             <label for="username" th:text="#{signup.form.username}"></label>
                             <input type="text" id="username" th:field="*{username}"
-                                   class="form-control"
-                                   data-validation="length alphanumeric" 
-		 					       data-validation-length="3-12" 
-		 						   data-validation-error-msg="username is required"  />
+                                   class="form-control" />
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div th:if="${duplicatedEmail}">
                             <label for="email" th:text="#{signup.form.error.email.already.exists}" ></label>
-                            <input type="email" id="email" th:field="*{email}" class="form-control fieldError" data-validation="email"/>
+                            <input type="email" id="email" th:field="*{email}" class="form-control fieldError" data-validation="email" />
                         </div>
                         <div th:if="${duplicatedEmail == null}">
                             <label for="email" th:text="#{form.email}"></label>
@@ -74,29 +71,28 @@
 
                     <div class="form-group">
                         <label for="password" th:text="#{signup.form.password}"></label>
-                        <input type="password" id="password" class="form-control" name="password" />
+                        <input type="password" id="password" th:field="*{password}" class="form-control"/>
                     </div>
+
                     <div class="form-group">
                         <label for="confirmPassword" th:text="#{signup.form.confirm.password}"></label>
-                        <input type="password" id="confirmPassword" class="form-control" name="password_again"/>
+                        <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <label for="firstName" th:text="#{form.firstname}"></label>
                         <input type="text" id="firstName" th:field="*{firstName}" class="form-control"
                         data-validation="length alphanumeric" 
-		 				data-validation-length="3-12" 
-		 			    data-validation-error-msg="first name is required"
-                        
-                        />
+		 				data-validation-length="3-20" 
+		 				data-validation-error-msg="first name is required" />
                     </div>
 
                     <div class="form-group">
                         <label for="lastName" th:text="#{form.lastname}"></label>
                         <input type="text" id="lastName" th:field="*{lastName}" class="form-control" 
                         data-validation="length alphanumeric" 
-		 				data-validation-length="3-12" 
-		 			    data-validation-error-msg="last name is required" />
+		 				data-validation-length="3-20" 
+		 				data-validation-error-msg="last name is required" />
                     </div>
 
                     <div class="form-group">
@@ -139,10 +135,10 @@
                     <div class="form-group">
                         <label for="phoneNumber" th:text="#{signup.form.phoneNumber}"></label>
                         <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control"
-                               name="phoneNumber"
+                               name="phoneNumber" 
                                data-validation="length alphanumeric" 
-		 				       data-validation-length="3-12" 
-		 			           data-validation-error-msg="first name is required" />
+		 					   data-validation-length="3-20" 
+		 					   data-validation-error-msg="phone number is required" />
                     </div>
 
                     <!-- Additional HTML form fields for Pro Account subscription -->
@@ -204,7 +200,6 @@
 
 </div><!-- /.container -->
 
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 
@@ -217,26 +212,6 @@
 
 </script>
 
-	<!-- Jquery validation password -->
-	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-	<script>
-
-	jQuery.validator.setDefaults({
-	  debug: false,
-	  success: "valid"
-	});
-	$( "#signupForm" ).validate({
-	  rules: {
-	    password: "required",
-	    password_again: {
-	      equalTo: "#password"
-	    }
-	  }
-	});
-	</script>
-	<!-- end Jquery validation password -->
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

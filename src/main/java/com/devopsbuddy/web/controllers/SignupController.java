@@ -2,21 +2,18 @@ package com.devopsbuddy.web.controllers;
 
 
 import java.io.IOException;
-import java.time.Clock;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,13 +25,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.devopsbuddy.backend.persistence.domain.backend.Plan;
 import com.devopsbuddy.backend.persistence.domain.backend.Role;
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.backend.persistence.domain.backend.UserRole;
+import com.devopsbuddy.backend.service.PlanService;
 import com.devopsbuddy.backend.service.UserService;
 import com.devopsbuddy.enums.PlansEnum;
 import com.devopsbuddy.enums.RolesEnum;
@@ -48,13 +45,14 @@ import com.devopsbuddy.web.domain.frentend.ProAccountPayload;
 @Controller
 public class SignupController {
 	
-	/*
 	@Autowired
     private PlanService planService;
 
+	
     @Autowired
     private UserService userService;
 
+    /*
     @Autowired
     private S3Service s3Service;
 
@@ -92,11 +90,9 @@ public class SignupController {
 
         return SUBSCRIPTION_VIEW_NAME;
     }
-
-    /*
+    
     @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
     public String signUpPost(@RequestParam(name = "planId", required = true) int planId,
-                             @RequestParam(name = "file", required = false) MultipartFile file,
                              @ModelAttribute(PAYLOAD_MODEL_KEY_NAME) @Valid ProAccountPayload payload,
                              ModelMap model) throws IOException {
 
@@ -137,6 +133,7 @@ public class SignupController {
         LOG.debug("Transforming user payload into User domain object");
         User user = UserUtils.fromWebUserToDomainUser(payload);
 
+        /*
         // Stores the profile image on Amazon S3 and stores the URL in the user's record
         if (file != null && !file.isEmpty()) {
 
@@ -149,6 +146,7 @@ public class SignupController {
             }
 
         }
+        */
 
         // Sets the Plan and the Roles (depending on the chosen plan)
         LOG.debug("Retrieving plan from the database");
@@ -182,6 +180,8 @@ public class SignupController {
                 return SUBSCRIPTION_VIEW_NAME;
 
             }
+            
+            /*
 
             // If the user has selected the pro account, creates the Stripe customer to store the stripe customer id in
             // the db
@@ -194,8 +194,9 @@ public class SignupController {
             LOG.info("Subscribing the customer to plan {}", selectedPlan.getName());
             String stripeCustomerId = stripeService.createCustomer(stripeTokenParams, customerParams);
             LOG.info("Username: {} has been subscribed to Stripe", payload.getUsername());
-
+			
             user.setStripeCustomerId(stripeCustomerId);
+            */
 
             registeredUser = userService.createUser(user, PlansEnum.PRO, roles);
             LOG.debug(payload.toString());
@@ -213,7 +214,9 @@ public class SignupController {
 
         return SUBSCRIPTION_VIEW_NAME;
     }
-
+    
+    
+/*
     @ExceptionHandler({StripeException.class, S3Exception.class})
     public ModelAndView signupException(HttpServletRequest request, Exception exception) {
 
@@ -226,7 +229,13 @@ public class SignupController {
         mav.setViewName(GENERIC_ERROR_VIEW_NAME);
         return mav;
     }
-
+*/
+    
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handle(HttpMessageNotReadableException e) {
+    	LOG.warn("Returning HTTP 400 Bad Request", e);
+    }
 
     //--------------> Private methods
 
@@ -241,7 +250,5 @@ public class SignupController {
         }
 
     }
-    
-    */
 
 }
