@@ -141,6 +141,8 @@ public class SignupController {
 
             String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
             if (profileImageUrl != null) {
+            	//this will return some pci informations like accountId and secretKey
+            	profileImageUrl = profileImageUrl.substring(0, 55);
                 user.setProfileImageURL(profileImageUrl);
             } else {
                 LOG.warn("There was a problem uploading the profile image to S3. The user's profile will" +
