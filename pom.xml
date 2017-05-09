@@ -118,10 +118,14 @@
 			<groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
 		    <version>LATEST</version>
-		</dependency>		
+		</dependency>	
 		
-				
-		
+		<!-- Stripe dependencies -->
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>1.40.0</version>
+		</dependency>	
 	</dependencies>
 
 	<build>
