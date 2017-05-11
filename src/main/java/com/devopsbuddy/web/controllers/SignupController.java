@@ -2,11 +2,14 @@ package com.devopsbuddy.web.controllers;
 
 
 import java.io.IOException;
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.devopsbuddy.backend.persistence.domain.backend.Plan;
 import com.devopsbuddy.backend.persistence.domain.backend.Role;
@@ -38,6 +42,8 @@ import com.devopsbuddy.backend.service.UserService;
 import com.devopsbuddy.enums.PlansEnum;
 import com.devopsbuddy.enums.RolesEnum;
 import com.devopsbuddy.enums.UserUtils;
+import com.devopsbuddy.exceptions.S3Exception;
+import com.devopsbuddy.exceptions.StripeException;
 import com.devopsbuddy.web.domain.frentend.BasicAccountPayload;
 import com.devopsbuddy.web.domain.frentend.ProAccountPayload;
 
@@ -218,8 +224,10 @@ public class SignupController {
         return SUBSCRIPTION_VIEW_NAME;
     }
     
-    
-/*
+    /*
+     * This is a handler exception in spring MVC, visit the https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc for more details
+     * 
+     */
     @ExceptionHandler({StripeException.class, S3Exception.class})
     public ModelAndView signupException(HttpServletRequest request, Exception exception) {
 
@@ -232,7 +240,6 @@ public class SignupController {
         mav.setViewName(GENERIC_ERROR_VIEW_NAME);
         return mav;
     }
-*/
     
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)

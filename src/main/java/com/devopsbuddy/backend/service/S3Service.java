@@ -169,14 +169,10 @@ public class S3Service {
                 GeneratePresignedUrlRequest generatePresignedUrlRequest = 
     				    new GeneratePresignedUrlRequest(bucketName, key);
     			generatePresignedUrlRequest.setMethod(HttpMethod.GET); 
-
-                
-                
                 
     			URL url = s3Client.generatePresignedUrl(generatePresignedUrlRequest); 
     			if(url != null)
     			resourceUrl = url.toString();
-//                resourceUrl = s3Client.getResourceUrl(bucketName, key);
             } catch (AmazonClientException ace) {
                 LOG.error("A client exception occurred while trying to store the profile" +
                         " image {} on S3. The profile image won't be stored", resource.getAbsolutePath(), ace);
@@ -186,6 +182,6 @@ public class S3Service {
 
         return resourceUrl;
 
-}
+    }
 
 }
