@@ -3,10 +3,10 @@
  */
 package com.devopsbuddy.config;
 
-import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.List;
-
+import com.devopsbuddy.backend.service.UserSecurityService;
+import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
+import com.devopsbuddy.web.controllers.HomeController;
+import com.devopsbuddy.web.controllers.SignupController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +17,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.devopsbuddy.backend.service.UserSecurityService;
-import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
-import com.devopsbuddy.web.controllers.SignupController;
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Daniel on 21 de abr de 2017
@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
             ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
             SignupController.SIGNUP_URL_MAPPING,
-            SignupController.SUBSCRIPTION_VIEW_NAME
+            SignupController.SUBSCRIPTION_VIEW_NAME,
+			HomeController.HOME_VIEW_NAME
     };
 	
 	@Override
