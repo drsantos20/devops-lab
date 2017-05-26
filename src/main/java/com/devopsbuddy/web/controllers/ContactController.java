@@ -28,6 +28,9 @@ public class ContactController {
 	
 	/* The contact us view name for testing integration*/
 	public static final String CONTACT_US_VIEW_NAME = "contact/contact";
+
+	/* The contact us view name for testing integration*/
+	public static final String CONTACT_US_SUCCESS_VIEW_NAME = "contact/success";
 	
 	@Autowired
 	private EmailService emailService;
@@ -43,7 +46,7 @@ public class ContactController {
 	public String contactPost(@ModelAttribute(FEEDBACK_MODEL_KEY) FeedbackPojo feedback) {
 		log.debug("Feedback POJO content {}", feedback);
 		emailService.sendFeedbackEmail(feedback);
-		return ContactController.CONTACT_US_VIEW_NAME;
+		return ContactController.CONTACT_US_SUCCESS_VIEW_NAME;
 	}
 
 }

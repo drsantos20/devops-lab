@@ -4,8 +4,9 @@
 package com.devopsbuddy.config;
 
 import com.devopsbuddy.backend.service.UserSecurityService;
+import com.devopsbuddy.web.controllers.ContactController;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
-import com.devopsbuddy.web.controllers.HomeController;
+import com.devopsbuddy.web.controllers.IndexController;
 import com.devopsbuddy.web.controllers.SignupController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -61,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
             SignupController.SIGNUP_URL_MAPPING,
             SignupController.SUBSCRIPTION_VIEW_NAME,
-			HomeController.HOME_VIEW_NAME
+			IndexController.INDEX_HOME_PAGE,
+			ContactController.CONTACT_US_SUCCESS_VIEW_NAME
     };
 	
 	@Override
