@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="common/header :: common-header" />
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"> </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="well">
+                <div class="row text-center">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <h2 style="color:#0fad00">Success</h2>
+                        <img src="http://osmhotels.com//assets/check-true.jpg"/>
+                        <h3>Dear, Customer</h3>
+                        <p style="font-size:20px;color:#5C5C5C;"><h4 th:text="#{contact.success.email}"></h4></p>
+                        <div class="form-group">
+                            <a href="/" class="btn btn-info" role="button" th:text="#{navbar.home.text}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<div th:replace="common/header :: before-body-scripts" ></div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="common/header :: common-header" />
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"> </div>
+
+ <div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="well">
+				<div class="text-center">
+					<h1 th:text="#{contact.h1.text}"></h1>
+					<p class="lead" th:text="#{contact.p.lead}"></p>
+					
+					<form id="contactForm"
+						th:action="@{/contact}"
+						th:object="${feedback}"
+						method="post" class="text-left">
+						
+						<div class="form-group">
+							<label for="email" th:text="#{form.email}"></label>
+							<input type="email" id="email" th:field="*{email}" class="form-control"
+							data-validation="email" />
+						</div>
+						
+						<div class="form-group">
+							<label for="firstName" th:text="#{form.firstName}"></label>
+							<input type="text" id="firstName" th:field="*{firstName}" class="form-control" 
+							data-validation="length alphanumeric" 
+		 					data-validation-length="3-12" 
+		 					data-validation-error-msg="first name is required" />
+						</div>
+						
+						<div class="form-group">
+							<label for="lastName" th:text="#{form.lastName}"></label>
+							<input type="text" name="lastName" id="lastName" th:field="*{lastName}" class="form-control"
+							data-validation="length alphanumeric"
+							data-validation-length="3-12" 
+							data-validation-error-msg="last name is required" />
+						</div>
+						
+						<div class="form-group">
+							<label for="feedback" th:text="#{form.feedback.form.text}"></label>
+							<textarea name="feedback" id="feedback" th:field="*{feedback}" class="form-control" 
+							data-validation="length alphanumeric"
+							data-validation-length="3-12" 
+							data-validation-error-msg="feedback is required"></textarea>
+						</div>
+						
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+						</div>
+					</form>
+				</div> 
+			</div>
+		</div>
+	</div>
+
+	 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		 <div class="modal-dialog">
+			 <div class="modal-content">
+				 <div class="modal-header modal-header-success">
+					 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					 <h1><i class="glyphicon glyphicon-thumbs-up"></i> Email has been send</h1>
+				 </div>
+				 <div class="modal-body">
+				 </div>
+				 <div class="modal-footer">
+					 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+				 </div>
+			 </div><!-- /.modal-content -->
+		 </div><!-- /.modal-dialog -->
+	 </div><!-- /.modal -->
+ </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+<script>
+
+  $.validate({
+    modules : 'location, date, security, file',
+  });
+
+$( "#contactForm" ).submit(function( event ) {
+  $('#myModal').modal('show');
+});
+
+</script>
+
+
+<!-- Bootstrap core JavaScript -->
+<div th:replace="common/header :: before-body-scripts" ></div>
+</body>
+</html>
